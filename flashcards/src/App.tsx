@@ -1,106 +1,127 @@
-import { useState } from 'react'
-import './App.css'
-import Card from './components/Card'
-import { HiraganaCharacter } from './types/HiraganaCharacterTypes';
+import { useState } from "react";
+import "./App.css";
+import Card from "./components/Card";
+import { HiraganaButton, HiraganaCharacter } from "./types/HiraganaCharacterTypes";
+import { hiraganaVowels, hiraganaKRow, hiraganaSRow, hiraganaTRow, hiraganaNRow, hiraganaHRow, hiraganaMRow, hiraganaYRow, hiraganaRRow, hiraganaWRow, hiraganaAll } from "./hiragana-data/hiragana";
+
+
 
 function App() {
+  const [chosenOptionTitle, setChosenOptionTitle] = useState<string>();
   const [char, setChar] = useState<HiraganaCharacter>();
-
-  const hiraganaVowels = [
-    { hiragana: "あ", english: "a" },
-    { hiragana: "い", english: "i" },
-    { hiragana: "う", english: "u" },
-    { hiragana: "え", english: "e" },
-    { hiragana: "お", english: "o" },
+  const [chosenOption, setChosenOption] = useState<number>(0);
+  const hiraganaButtonRows : HiraganaButton[] = [
+    {
+      id: 0,
+      title: "Vowels",
+    },
+    {
+      id: 1,
+      title: "K-row",
+    },
+    {
+      id: 2,
+      title: "S-row",
+    },
+    {
+      id: 3,
+      title: "T-row",
+    },
+    {
+      id: 4,
+      title: "N-row",
+    },
+    {
+      id: 5,
+      title: "H-row",
+    },
+    {
+      id: 6,
+      title: "M-row",
+    },
+    {
+      id: 7,
+      title: "Y-row",
+    },
+    {
+      id: 8,
+      title: "R-row",
+    },
+    {
+      id: 9,
+      title: "W-row",
+    },
+    {
+      id: 10,
+      title: "All",
+    },
   ];
 
-  const hiraganaKRow = [
-    { hiragana: "か", english: "ka" },
-    { hiragana: "き", english: "ki" },
-    { hiragana: "く", english: "ku" },
-    { hiragana: "け", english: "ke" },
-    { hiragana: "こ", english: "ko" },
-  ];
-
-  const hiraganaSRow = [
-    { hiragana: "さ", english: "sa" },
-    { hiragana: "し", english: "shi" },
-    { hiragana: "す", english: "su" },
-    { hiragana: "せ", english: "se" },
-    { hiragana: "そ", english: "so" },
-  ];
-
-  const hiraganaTRow = [
-    { hiragana: "た", english: "ta" },
-    { hiragana: "ち", english: "chi" },
-    { hiragana: "つ", english: "tsu" },
-    { hiragana: "て", english: "te" },
-    { hiragana: "と", english: "to" },
-  ];
-
-  const hiraganaNRow = [
-    { hiragana: "な", english: "na" },
-    { hiragana: "に", english: "ni" },
-    { hiragana: "ぬ", english: "nu" },
-    { hiragana: "ね", english: "ne" },
-    { hiragana: "の", english: "no" },
-  ];
-
-  const hiraganaHRow = [
-    { hiragana: "は", english: "ha" },
-    { hiragana: "ひ", english: "hi" },
-    { hiragana: "ふ", english: "fu" },
-    { hiragana: "へ", english: "he" },
-    { hiragana: "ほ", english: "ho" },
-  ];
-
-  const hiraganaMRow = [
-    { hiragana: "ま", english: "ma" },
-    { hiragana: "み", english: "mi" },
-    { hiragana: "む", english: "mu" },
-    { hiragana: "め", english: "me" },
-    { hiragana: "も", english: "mo" },
-  ];
-
-  const hiraganaYRow = [
-    { hiragana: "や", english: "ya" },
-    { hiragana: "ゆ", english: "yu" },
-    { hiragana: "よ", english: "yo" },
-  ];
-
-  const hiraganaRRow = [
-    { hiragana: "ら", english: "ra" },
-    { hiragana: "り", english: "ri" },
-    { hiragana: "る", english: "ru" },
-    { hiragana: "れ", english: "re" },
-    { hiragana: "ろ", english: "ro" },
-  ];
-
-  const hiraganaWRow: HiraganaCharacter[] = [
-    { hiragana: "わ", english: "wa" },
-    { hiragana: "を", english: "wo" },
-    { hiragana: "ん", english: "n" },
-  ];
-
-  
-  const generateHiraganaChar = () => {
-    setChar(randomChar(hiraganaVowels));
+  const getTheSelectedHiraganaRow = (id: number) => {
+    switch (id) {
+      case 0:
+        return hiraganaVowels;
+      case 1:
+        return hiraganaKRow;
+      case 2:
+        return hiraganaSRow;
+      case 3:
+        return hiraganaTRow;
+      case 4:
+        return hiraganaNRow;
+      case 5:
+        return hiraganaHRow;
+      case 6:
+        return hiraganaMRow;
+      case 7:
+        return hiraganaYRow;
+      case 8:
+        return hiraganaRRow;
+      case 9:
+        return hiraganaWRow;
+      case 10:
+        return hiraganaAll;
+      default:
+        return hiraganaVowels
+    }
   };
-  
-  const randomChar = (char: HiraganaCharacter[]) => {
+
+  const generateHiraganaCharacter = () => {
+    setChar(getARandomChar(getTheSelectedHiraganaRow(chosenOption)));
+  };
+
+  const getARandomChar = (char: HiraganaCharacter[]) => {
     // Generate a random index within the range of the row length
     const randomIndex = Math.floor(Math.random() * char.length);
     // Return the hiragana character at the random index
     return char[randomIndex];
   };
- 
+
   return (
     <>
-    <h1>Hiragana</h1>
-    <Card hiragana={char?.hiragana} english={char?.english}  />
-    <button onClick={generateHiraganaChar}>Generate</button>
+      <h1 className="text-3xl pb-5">Hiragana {chosenOptionTitle && `"${chosenOptionTitle}"`}</h1>
+
+      <div className="pb-5 flex justify-center">
+        <Card hiragana={char?.hiragana} english={char?.english} />
+      </div>
+      
+      <div>
+        <button className="bg-amber-200 border-yellow-400" onClick={generateHiraganaCharacter}>Generate</button>
+      </div>
+
+      <div className="pt-5">
+        {hiraganaButtonRows.map((option) => (
+          <button key={option.id} 
+          onClick={() => {
+            setChosenOptionTitle(option.title)
+            setChosenOption(option.id);
+          }} className="m-1">
+            {option.title}
+          </button>
+        ))}
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
