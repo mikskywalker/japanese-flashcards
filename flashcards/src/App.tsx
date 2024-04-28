@@ -3,10 +3,11 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="flex items-center justify-center">
-      <div className="bg-white md:border md:rounded-md shadow ">
+    <div className="">
+      <div className="bg-white md:border md:rounded-md md:shadow ">
         <Hiragana />
       </div>
+      <Footer />
     </div>
   );
 }
