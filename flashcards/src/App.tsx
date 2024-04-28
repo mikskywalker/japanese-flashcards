@@ -1,16 +1,13 @@
-import { useState } from "react";
-import "./App.css";
 import Hiragana from "./components/Hiragana";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <>
-      <div className="w-full">
-        <div className="sm:w-full md:max-w-md">
-          <Hiragana />
-        </div>
+    <div className="flex items-center justify-center">
+      <div className="bg-white md:border md:rounded-md shadow ">
+        <Hiragana />
       </div>
-    </>
+    </div>
   );
 }
 
