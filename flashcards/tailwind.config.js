@@ -8,6 +8,12 @@ export default {
       lg: "976px",
       xl: "1440px",
     },
+    // colors: {
+    //   transparent: "transparent",
+    //   current: "currentColor",
+    //   charcoal: "rgb(38 38 38)",
+    //   sun: "rgb(254 240 138)",
+    // },
     extend: {},
   },
   plugins: [],

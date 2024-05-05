@@ -69,6 +69,8 @@ export default function Hiragana() {
     },
   ];
 
+  const [prevIndex, setPrevIndex] = useState<number>();
+
   const getTheSelectedHiraganaRow = (id: number) => {
     switch (id) {
       case 0:
@@ -104,18 +106,57 @@ export default function Hiragana() {
 
   const getARandomChar = (char: HiraganaCharacter[]) => {
     // Generate a random index within the range of the row length
-    const randomIndex = Math.floor(Math.random() * char.length);
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * char.length);
+    } while (randomIndex === prevIndex);
     // Return the hiragana character at the random index
+    setPrevIndex(randomIndex);
     return char[randomIndex];
   };
+
   return (
     <div className="text-center max-w-md">
-      <div className="grid grid-cols-1 justify-items-center gap-4">
-        <div className="pt-10">
-          <h1 className="font-bold">Hiragana</h1>
+      <div className="grid grid-cols-1 pb-10 justify-items-center gap-4">
+        {/* Row Options */}
+        <div className="my-5">
+          {hiraganaButtonRows.map((option) => (
+            <button
+              className="border-gray-200 inline-flex gap-1 m-1 hover:bg-yellow-100 hover:border-yellow-400 active:bg-yellow-100 focus:outline-none focus:ring focus:ring-yellow-300 dark:hover:bg-yellow-500 dark:hover:text-neutral-800"
+              key={option.id}
+              onClick={() => {
+                setChosenOptionTitle(option.title);
+                setChosenOption(option.id);
+              }}
+            >
+              {option.title}
+              {option.id === 10 && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 text-yellow-500 dark:text-inherit"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                  />
+                </svg>
+              )}
+            </button>
+          ))}
+        </div>
+
+        <div>
+          <h1 className="font-bold text-neutral-800 dark:text-white">
+            Hiragana
+          </h1>
         </div>
         <div>
-          <h2 className="h-3 font-bold italic">
+          <h2 className="h-3 font-bold italic text-neutral-800">
             {chosenOptionTitle && `"${chosenOptionTitle}"`}
           </h2>
         </div>
@@ -123,9 +164,9 @@ export default function Hiragana() {
           <Card hiragana={char?.hiragana} english={char?.english} />
         </div>
 
-        <div className="">
+        <div>
           <button
-            className="bg-yellow-200 mt-5 shadow border-orange-100 border-2 hover:border-yellow-400 active:bg-yellow-100 focus:outline-none focus:ring focus:ring-yellow-300 inline-flex gap-1 "
+            className="bg-yellow-200 mt-5 text-xl shadow border-orange-100 border-2 hover:border-yellow-400 active:bg-yellow-100 focus:outline-none focus:ring focus:ring-yellow-300 inline-flex gap-1 dark:text-neutral-800 dark:bg-yellow-500 dark:border-yellow-400 dark:active:bg-yellow-600 dark:focus:ring-yellow-300 dark:hover:bg-yellow-600 dark:hover:text-white"
             onClick={generateHiraganaCharacter}
           >
             Generate
@@ -144,37 +185,6 @@ export default function Hiragana() {
               />
             </svg>
           </button>
-        </div>
-
-        <div className="my-5">
-          {hiraganaButtonRows.map((option) => (
-            <button
-              className="border-gray-200 inline-flex gap-1 m-1 hover:bg-yellow-100 hover:border-yellow-400 active:bg-yellow-100 focus:outline-none focus:ring focus:ring-yellow-300"
-              key={option.id}
-              onClick={() => {
-                setChosenOptionTitle(option.title);
-                setChosenOption(option.id);
-              }}
-            >
-              {option.title}
-              {option.id === 10 && (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6 text-yellow-500"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
-                  />
-                </svg>
-              )}
-            </button>
-          ))}
         </div>
       </div>
     </div>
