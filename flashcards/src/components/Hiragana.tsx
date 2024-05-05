@@ -1,116 +1,24 @@
 import React, { useState } from "react";
-import {
-  HiraganaButton,
-  HiraganaCharacter,
-} from "../types/HiraganaCharacterTypes";
+import { HiraganaCharacter } from "../types/HiraganaCharacterTypes";
 import Card from "./Card";
-import {
-  hiraganaVowels,
-  hiraganaKRow,
-  hiraganaSRow,
-  hiraganaTRow,
-  hiraganaNRow,
-  hiraganaHRow,
-  hiraganaMRow,
-  hiraganaYRow,
-  hiraganaRRow,
-  hiraganaWRow,
-  hiraganaAll,
-} from "../hiragana-data/hiragana";
+import { hiraganaButtonRows } from "../assets/utils/hiragana-button-rows";
+import { getTheSelectedHiraganaRow } from "../assets/utils/helper-functions";
 
 export default function Hiragana() {
   const [chosenOptionTitle, setChosenOptionTitle] = useState<string>();
   const [char, setChar] = useState<HiraganaCharacter>();
   const [chosenOption, setChosenOption] = useState<number>(0);
-  const hiraganaButtonRows: HiraganaButton[] = [
-    {
-      id: 0,
-      title: "Vowels",
-    },
-    {
-      id: 1,
-      title: "K-row",
-    },
-    {
-      id: 2,
-      title: "S-row",
-    },
-    {
-      id: 3,
-      title: "T-row",
-    },
-    {
-      id: 4,
-      title: "N-row",
-    },
-    {
-      id: 5,
-      title: "H-row",
-    },
-    {
-      id: 6,
-      title: "M-row",
-    },
-    {
-      id: 7,
-      title: "Y-row",
-    },
-    {
-      id: 8,
-      title: "R-row",
-    },
-    {
-      id: 9,
-      title: "W-row",
-    },
-    {
-      id: 10,
-      title: "All",
-    },
-  ];
-
   const [prevIndex, setPrevIndex] = useState<number>();
-
-  const getTheSelectedHiraganaRow = (id: number) => {
-    switch (id) {
-      case 0:
-        return hiraganaVowels;
-      case 1:
-        return hiraganaKRow;
-      case 2:
-        return hiraganaSRow;
-      case 3:
-        return hiraganaTRow;
-      case 4:
-        return hiraganaNRow;
-      case 5:
-        return hiraganaHRow;
-      case 6:
-        return hiraganaMRow;
-      case 7:
-        return hiraganaYRow;
-      case 8:
-        return hiraganaRRow;
-      case 9:
-        return hiraganaWRow;
-      case 10:
-        return hiraganaAll;
-      default:
-        return hiraganaVowels;
-    }
-  };
 
   const generateHiraganaCharacter = () => {
     setChar(getARandomChar(getTheSelectedHiraganaRow(chosenOption)));
   };
 
   const getARandomChar = (char: HiraganaCharacter[]) => {
-    // Generate a random index within the range of the row length
     let randomIndex;
     do {
       randomIndex = Math.floor(Math.random() * char.length);
     } while (randomIndex === prevIndex);
-    // Return the hiragana character at the random index
     setPrevIndex(randomIndex);
     return char[randomIndex];
   };
@@ -149,7 +57,6 @@ export default function Hiragana() {
             </button>
           ))}
         </div>
-
         <div>
           <h1 className="font-bold text-neutral-800 dark:text-white">
             Hiragana
@@ -163,7 +70,6 @@ export default function Hiragana() {
         <div>
           <Card hiragana={char?.hiragana} english={char?.english} />
         </div>
-
         <div>
           <button
             className="bg-yellow-200 mt-5 text-xl shadow border-orange-100 border-2 hover:border-yellow-400 active:bg-yellow-100 focus:outline-none focus:ring focus:ring-yellow-300 inline-flex gap-1 dark:text-neutral-800 dark:bg-yellow-500 dark:border-yellow-400 dark:active:bg-yellow-600 dark:focus:ring-yellow-300 dark:hover:bg-yellow-600 dark:hover:text-white"

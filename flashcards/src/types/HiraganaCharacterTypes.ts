@@ -3,8 +3,9 @@ export type HiraganaCharacter = {
   english?: string;
 };
 
+export type StudyChoiceType = {
+  id: number;
+  title: string;
+};
 
-export type HiraganaButton = {
-    id: number;
-    title: string;
-  }
+export type HiraganaButton = Pick<StudyChoiceType, "id" | "title">;
