@@ -3,8 +3,8 @@ import CapyLight from "../assets/light-icons8-capybara-96.png";
 
 export default function Footer() {
   return (
-    <footer className="mb-5 text-center dark:bg-neutral-900 dark:text-white ">
-      <div className="pt-5 pb-1 flex justify-center items-end w-full">
+    <footer className="text-center dark:bg-neutral-900 dark:text-white ">
+      <div className="flex items-end justify-center w-full pt-5 pb-1">
         <p className="font-medium">
           Coded with love by{" "}
           <a
@@ -18,15 +18,15 @@ export default function Footer() {
         <img
           src={CapyLight}
           alt="A logo of a Capybara"
-          className="h-12 light-image block dark:hidden"
+          className="block h-12 light-image dark:hidden"
         />
         <img
-          className="h-12 dark-image hidden dark:block"
+          className="hidden h-12 dark-image dark:block"
           src={CapyDark}
           alt="A logo of a Capybara"
         />
       </div>
-      <div className="text-xs italic pt-1">
+      <div className="pt-1 text-xs italic">
         <a target="_blank" href="https://icons8.com/icon/uoOWMrUsQgHs/capybara">
           Capybara
         </a>{" "}

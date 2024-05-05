@@ -40,20 +40,25 @@ function App() {
   }
 
   return (
-    <div className="">
-      {mainOptions.map((o) => {
-        return (
-          <button key={o.id} onClick={() => setStudyChoice(o)}>
-            {o.title}
-          </button>
-        );
-      })}
-
+    <div className="bg-red-200 min-h-[50rem]">
       <div className="bg-white rounded md:border md:rounded-md md:shadow dark:bg-neutral-800 dark:text-white">
         {getChosenStudy(studyChoice.id)}
       </div>
 
       <Footer />
+
+      <div
+        // todo: add footer option choices
+        className="fixed bottom-0 left-0"
+      >
+        {mainOptions.map((o) => {
+          return (
+            <button className="" key={o.id} onClick={() => setStudyChoice(o)}>
+              {o.title}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
