@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   HiraganaButton,
   HiraganaCharacter,
@@ -116,13 +116,13 @@ export default function Hiragana() {
   };
 
   return (
-    <div className="text-center max-w-md">
-      <div className="grid grid-cols-1 pb-10 justify-items-center gap-4">
+    <div className="max-w-md text-center">
+      <div className="grid grid-cols-1 gap-4 pb-10 justify-items-center">
         {/* Row Options */}
         <div className="my-5">
           {hiraganaButtonRows.map((option) => (
             <button
-              className="border-gray-200 inline-flex gap-1 m-1 hover:bg-yellow-100 hover:border-yellow-400 active:bg-yellow-100 focus:outline-none focus:ring focus:ring-yellow-300 dark:hover:bg-yellow-500 dark:hover:text-neutral-800"
+              className="inline-flex gap-1 m-1 border-gray-200 hover:bg-yellow-100 hover:border-yellow-400 active:bg-yellow-100 focus:outline-none focus:ring focus:ring-yellow-300 dark:hover:bg-yellow-500 dark:hover:text-neutral-800"
               key={option.id}
               onClick={() => {
                 setChosenOptionTitle(option.title);
@@ -156,7 +156,7 @@ export default function Hiragana() {
           </h1>
         </div>
         <div>
-          <h2 className="h-3 font-bold italic text-neutral-800">
+          <h2 className="h-3 italic font-bold text-neutral-800">
             {chosenOptionTitle && `"${chosenOptionTitle}"`}
           </h2>
         </div>
@@ -166,7 +166,7 @@ export default function Hiragana() {
 
         <div>
           <button
-            className="bg-yellow-200 mt-5 text-xl shadow border-orange-100 border-2 hover:border-yellow-400 active:bg-yellow-100 focus:outline-none focus:ring focus:ring-yellow-300 inline-flex gap-1 dark:text-neutral-800 dark:bg-yellow-500 dark:border-yellow-400 dark:active:bg-yellow-600 dark:focus:ring-yellow-300 dark:hover:bg-yellow-600 dark:hover:text-white"
+            className="inline-flex gap-1 mt-5 text-xl bg-yellow-200 border-2 border-orange-100 shadow hover:border-yellow-400 active:bg-yellow-100 focus:outline-none focus:ring focus:ring-yellow-300 dark:text-neutral-800 dark:bg-yellow-500 dark:border-yellow-400 dark:active:bg-yellow-600 dark:focus:ring-yellow-300 dark:hover:bg-yellow-600 dark:hover:text-white"
             onClick={generateHiraganaCharacter}
           >
             Generate
